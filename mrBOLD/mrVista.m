@@ -66,9 +66,6 @@ else
 end
 
 %% set global variables/properties
-% check if this matlab version has a JAVA bug, and if so, disable java
-% figures:
-javaFigs = mrvJavaFeature;  
 
 % Set HOMEDIR 
 HOMEDIR = pwd; %#ok<NASGU>
@@ -113,8 +110,5 @@ end
 
 %% clean up
 clear expectedMatlabVersion version matlabVersion
-
-% reset Java to the previous state
-mrvJavaFeature(javaFigs);
 
 return;
