@@ -1,3 +1,5 @@
+Changes, changes, changes
+
 ## Vistasoft
 
 This is the main software repository of the [Vista lab](http://vistalab.stanford.edu) at [Stanford University](http://stanford.edu). It contains Matlab code to perform a variety of analysis on MRI data, including functional MRI and diffusion MRI.
