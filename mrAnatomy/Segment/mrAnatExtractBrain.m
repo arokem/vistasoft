@@ -50,11 +50,9 @@ elseif(nargout==0)
     error('If you pass in raw image data, you must capture at least one output!');
 end
 
-% TODO: more robust way to find cygwin on PC
-if(ispc), bash = 'c:/cygwin/bin/bash.exe';
-else      bash = 'bash';
+if(ispc) 
+error('This function relies on FSL/BET and requires Linux or OSX.');
 end
-
 
 % First try the shell for the preferrred FSL location, if it is not found
 % then we'll test to see if the user is running OSX, if so then we'll point
@@ -86,7 +84,7 @@ else
 end
 
 % We could specify a better starting position for the BET surface
-% sphere estiamte, e.g., by using the talairach landmarks. 
+% sphere estimate, e.g., by using the talairach landmarks. 
 if(nargout==0)
     [p,f,e] = fileparts(ni.fname);
     [x,f,e2] = fileparts(f);
@@ -100,7 +98,7 @@ for ii=1:numel(betLevel)
     fid = fopen(betScript,'wt');
     fprintf(fid,'#!/bin/bash\nexport FSLOUTPUTTYPE=NIFTI_GZ\n%s\n',betCmd);
     fclose(fid);
-    unix([bash ' ' betScript]);
+    unix(['bash ' betScript]);
     %unix(['export FSLOUTPUTTYPE=NIFTI_GZ ; ' betCmd]);
     betOut = [betOut '_mask.nii.gz'];
     if(nargout==0)

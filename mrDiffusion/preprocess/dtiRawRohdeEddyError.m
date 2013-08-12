@@ -62,37 +62,3 @@ err = (sum(s1.*log2(s1))+sum(s2.*log2(s2)))/sum(sum(H.*log2(H)));
 err= -err;
 
 return;
-
-
-% OLD CODE:
-% t = mc(1:3);
-% r = mc(4:6);
-% c = mc(7:14);
-% % Convert Euler angles into a rotation matrix
-% R = [cos(r(2))*cos(r(3)),                                   cos(r(2))*sin(r(3)),  sin(r(2)); 
-%      sin(r(1))*-sin(r(2))*cos(r(3))+cos(r(1))*-sin(r(3)),   sin(r(1))*-sin(r(2))*sin(r(3))+cos(r(1))*cos(r(3)),  sin(r(1))*cos(r(2));
-%      cos(r(1))*-sin(r(2))*cos(r(3))+-sin(r(1))*-sin(r(3)),  cos(r(1))*-sin(r(2))*sin(r(3))+-sin(r(1))*cos(r(3)), cos(r(1))*cos(r(2))];
-% % Apply rotation
-% x = R*x;
-% % Apply translation
-% x(1,:) = x(1,:)+t(1);
-% x(2,:) = x(2,:)+t(2);
-% x(3,:) = x(3,:)+t(3);
-% % Apply warping
-% oneSq = x(1,:).^2;
-% twoSq = x(2,:).^2;
-% b_eddy = c(1).*x(1,:) + c(2).*x(2,:) + c(3).*x(3,:) ...
-%         + c(4).*x(1,:).*x(2,:) + c(5).*x(1,:).*x(3,:) ...
-%         + c(6).*x(2,:).*x(3,:) + c(7).*(oneSq-twoSq)...
-%         + c(8).*(2*x(3,:).^2 - oneSq - twoSq);
-% x(phaseDir,:) = x(phaseDir,:) - b_eddy;
-%     
-% % This will also do the coord xform, but is slower
-% % xf.phaseDir = phaseDir;
-% % xf.ecParams = mc;
-% % x = mrAnatXformCoords(xf,x,false);
-% 
-% srcIm = reshape(mrAnatFastInterp3(srcIm, x),sz);
-
-%srcIm = reshape(mrAnatFastInterp3(srcIm, x, [mc phaseDir]), sz);
-%err = mrAnatComputeMutualInfo(srcIm,trgIm,sampDensity);
